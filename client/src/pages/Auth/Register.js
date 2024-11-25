@@ -1,10 +1,9 @@
- import React, { useState } from 'react';
-import Layout from '../../components/Layout/Layout.js';
-import './Register.css'; // Import the CSS file
-
-import  toast  from 'react-hot-toast';
-import axios from 'axios'; // Import axios for making HTTP requests
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import Layout from "../../components/Layout/Layout.js";
+import "./Register.css"; // Custom CSS file for styling
+import toast from "react-hot-toast";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -14,21 +13,21 @@ const Register = () => {
   const [address, setAddress] = useState("");
   const [answer, setAnswer] = useState("");
   const navigate = useNavigate();
+
   // Form submission handler
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API}/api/v1/auth/register`,{name, email, password,phone, address,answer}
-
-        );
-     if(res.data.success) {
-        toast.success(res.data.message)
+      const res = await axios.post(
+        `${process.env.REACT_APP_API}/api/v1/auth/register`,
+        { name, email, password, phone, address, answer }
+      );
+      if (res.data.success) {
+        toast.success(res.data.message);
         navigate("/login");
-     }
-     else{
-        toast.error(res.data.message)
-     }  
-      // Handle response logic here
+      } else {
+        toast.error(res.data.message);
+      }
     } catch (error) {
       console.error("Error during registration:", error);
       toast.error("Error during registration, please try again later.");
@@ -37,98 +36,106 @@ const Register = () => {
 
   return (
     <Layout title={"Register"}>
-      <div className="register-container">
-        
-        <div className="register-image">
-          <img src="https://imgs.search.brave.com/Jm4MzZYKZYn-omIZZpADgFQYgo61GFnHx1Fzc8_vhzI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/c2h1dHRlcnN0b2Nr/LmNvbS9pbWFnZS1w/aG90by9jb3B5cmln/aHQtcHJvdGVjdGlv/bi1jb25jZXB0LXJl/Z2lzdHJhdGlvbi10/cmFkZW1hcmstMjYw/bnctMjUwMDg1NTI5/MS5qcGc" alt="Register" />
+      <div className="register-page">
+        {/* Left Section */}
+        <div className="register-left">
+          <img
+            src="/images/login-img.jpg"
+            alt="Register"
+            className="register-image"
+          />
+          <h2 className="welcome-message">Join Us Today!</h2>
+          <p className="description">
+            Sign up to unlock exclusive deals, personalized recommendations, and
+            much more!
+          </p>
         </div>
 
-       
-        <div className="register-form-container">
-          <form className="register-form" onSubmit={handleSubmit}>
-            <h2>Create Account</h2>
-
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                className="form-control"
-                placeholder="Enter your name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                className="form-control"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                className="form-control"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="phone">Phone</label>
-              <input
-                type="tel"
-                id="phone"
-                className="form-control"
-                placeholder="Enter your phone number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="address">Address</label>
-              <input
-                type="text"
-                id="address"
-                className="form-control"
-                placeholder="Enter your address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="address">Answer</label>
-              <input
-                type="text"
-                id="answer"
-                className="form-control"
-                placeholder="What is your Favorite sports"
-                value={answer}
-                onChange={(e) => setAnswer(e.target.value)}
-                required
-              />
-            </div>
-
-            <button type="submit" className="btn btn-primary">
-              Register
-            </button>
-          </form>
+        {/* Right Section */}
+        <div className="register-right">
+          <div className="register-form-container">
+            <h2 className="form-title">Create Your Account</h2>
+            <form className="register-form" onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="name">Full Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  className="form-control"
+                  placeholder="Enter your name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  className="form-control"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  className="form-control"
+                  placeholder="Create a strong password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="phone">Phone Number</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  className="form-control"
+                  placeholder="Enter your phone number"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="address">Address</label>
+                <input
+                  type="text"
+                  id="address"
+                  className="form-control"
+                  placeholder="Enter your address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="answer">Security Question</label>
+                <input
+                  type="text"
+                  id="answer"
+                  className="form-control"
+                  placeholder="What is your favorite sport?"
+                  value={answer}
+                  onChange={(e) => setAnswer(e.target.value)}
+                  required
+                />
+              </div>
+              <button type="submit" className="btn btn-primary btn-block">
+                Register
+              </button>
+            </form>
+            <p className="login-link">
+              Already have an account? <a href="/login">Login here</a>.
+            </p>
+          </div>
         </div>
       </div>
     </Layout>

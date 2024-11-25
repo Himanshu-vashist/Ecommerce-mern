@@ -1,74 +1,156 @@
-/* Overall container */
-.register-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #f9f9f9;
+/* General Styling */
+
+
+.register-page {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  margin-top: 3rem;
+  justify-content: center;
+  background-color: #f9f9f9;
+}
+
+/* Left Section */
+.register-left {
+  flex: 1;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  margin: 3rem;
+}
+
+.register-left .register-image {
+  max-width: 80%;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.welcome-message {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 1.5;
+  max-width: 400px;
+}
+
+/* Right Section */
+.register-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.register-form-container {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.form-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  text-align: center;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+.login-link a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .register-page {
+    flex-direction: column;
+  }
+
+  .register-left,
+  .register-right {
+    flex: none;
+    width: 100%;
     padding: 20px;
-    gap: 20px;
   }
-  
-  /* Left-side image */
-  .register-image img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .register-left .register-image {
+    max-width: 60%;
   }
-  
-  /* Right-side form container */
-  .register-form-container {
-    flex: 1;
-    max-width: 500px;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .form-title {
+    font-size: 1.5rem;
   }
-  
-  /* Form title */
-  .register-form h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.8em;
-    color: #333;
+
+  .welcome-message {
+    font-size: 1.6rem;
   }
-  
-  /* Form groups */
-  .form-group {
-    margin-bottom: 15px;
+
+  .description {
+    font-size: 0.9rem;
   }
-  
-  .form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #555;
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1em;
-  }
-  
-  /* Submit button */
-  .btn-primary {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-primary:hover {
-    background-color: #0056b3;
-  }
-  
+}

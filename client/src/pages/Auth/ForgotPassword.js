@@ -3,7 +3,7 @@ import Layout from "./../../components/Layout/Layout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import "../../styles/AuthStyles.css";
+import "./AuthStyles.css";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -42,59 +42,73 @@ const ForgotPassword = () => {
 
   return (
     <Layout title={"Forgot Password - Ecommerce APP"}>
-      <div className="form-container">
-        <form onSubmit={handleSubmit}>
-          <h4 className="title">RESET PASSWORD</h4>
+      <div className="forgot-password-page">
+        {/* Left Section */}
+        <div className="forgot-password-left">
+          <img
+            src="/images/login-img.jpg"
+            alt="Forgot Password"
+            className="forgot-password-image"
+          />
+        </div>
 
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label">
-              Email Address
-            </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="form-control"
-              id="email"
-              placeholder="Enter Your Email"
-              required
-            />
+        {/* Right Section */}
+        <div className="forgot-password-right">
+          <div className="form-container">
+            <form onSubmit={handleSubmit}>
+              <h4 className="title">RESET PASSWORD</h4>
+
+              <div className="mb-3">
+                <label htmlFor="email" className="form-label">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="form-control"
+                  id="email"
+                  placeholder="Enter Your Email"
+                  required
+                />
+              </div>
+
+              <div className="mb-3">
+                <label htmlFor="answer" className="form-label">
+                  Security Question: Your Favorite Sport
+                </label>
+                <input
+                  type="text"
+                  value={answer}
+                  onChange={(e) => setAnswer(e.target.value)}
+                  className="form-control"
+                  id="answer"
+                  placeholder="Enter Your Favorite Sport Name"
+                  required
+                />
+              </div>
+
+              <div className="mb-3">
+                <label htmlFor="newPassword" className="form-label">
+                  New Password
+                </label>
+                <input
+                  type="password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  className="form-control"
+                  id="newPassword"
+                  placeholder="Enter Your Password"
+                  required
+                />
+              </div>
+
+              <button type="submit" className="btn btn-primary">
+                RESET
+              </button>
+            </form>
           </div>
-
-          <div className="mb-3">
-            <label htmlFor="answer" className="form-label">
-              Security Question: Your Favorite Sport
-            </label>
-            <input
-              type="text"
-              value={answer}
-              onChange={(e) => setAnswer(e.target.value)}
-              className="form-control"
-              id="answer"
-              placeholder="Enter Your Favorite Sport Name"
-              required
-            />
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="newPassword" className="form-label">
-              New Password
-            </label>
-            <input
-              type="password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              className="form-control"
-              id="newPassword"
-              placeholder="Enter Your Password"
-              required
-            />
-          </div>
-
-          <button type="submit" className="btn btn-primary">
-            RESET
-          </button>
-        </form>
+        </div>
       </div>
     </Layout>
   );

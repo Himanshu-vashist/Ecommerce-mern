@@ -1,0 +1,38 @@
+.navbar {
+    background-color: #ffffff;
+    padding: 1rem;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+  
+  .nav-link {
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  
+  .nav-link:hover {
+    color: #007bff;
+  }
+  
+  .navbar-toggler-icon {
+    background-color: #007bff;
+    border-radius: 4px;
+    padding: 4px;
+  }
+  
+  .dropdown-menu {
+    border-radius: 8px;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .badge {
+    font-size: 0.9rem;
+  }
+  
