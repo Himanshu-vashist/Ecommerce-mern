@@ -7,7 +7,7 @@ import axios from "../config/axios";
 import toast from "react-hot-toast";
 import Layout from "./../components/Layout/Layout";
 import { AiOutlineReload } from "react-icons/ai";
-import "../styles/Homepage.css";
+import "./Homepage.css";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -178,13 +178,13 @@ const HomePage = () => {
                   </p>
                   <div className="card-name-price">
                     <button
-                      className="btn btn-info ms-1"
+                      className="btn btn-primary ms-1"
                       onClick={() => navigate(`/product/${p.slug}`)}
                     >
                       More Details
                     </button>
                     <button
-                      className="btn btn-dark ms-1"
+                      className="btn btn-warning ms-1"
                       onClick={() => {
                         setCart([...cart, p]);
                         localStorage.setItem(
