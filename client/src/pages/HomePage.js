@@ -25,10 +25,11 @@ const HomePage = () => {
     try {
       const { data } = await axios.get("/api/v1/category/get-category");
       if (data?.success) {
-        setCategories(data?.category);
+        setCategories(data.category);
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching categories:", error);
+    toast.error("Failed to load categories");
     }
   };
 
