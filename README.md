@@ -1,7 +1,7 @@
 E-Commerce Application
 This is a fully functional e-commerce web application developed using the MERN (MongoDB, Express.js, React.js, Node.js) stack. The project demonstrates a complete online shopping workflow with a responsive user interface, secure user authentication, and robust backend functionality.
 
-Features \\n
+Features <br> \\n
 User Features \\n
 🔑 User Authentication: Secure login and signup with validation.\\n
 🛍️ Product Management: Browse, search, and filter products dynamically.
