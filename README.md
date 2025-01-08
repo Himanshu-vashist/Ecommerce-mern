@@ -5,11 +5,16 @@ Features <br>
 User Features <br>
 🔑 User Authentication: Secure login and signup with validation.<br>
 🛍️ Product Management: Browse, search, and filter products dynamically.<br>
-![productDetails](https://github.com/user-attachments/assets/19e9d040-87b0-4f6f-9a99-3814efb2cc07)
-![productDetails](https://github.com/user-attachments/assets/c1cca312-a42c-423a-88d2-dcfafe1b3d5b)
+
+![home 1](https://github.com/user-attachments/assets/3ca31239-4cef-478e-8e35-cabffc92579f)<br>
+
 🛒 Shopping Cart: Add/remove items, update quantity, and calculate total cost in real-time.<br>
-![cart](https://github.com/user-attachments/assets/7e9310df-0592-46d6-bfbf-89ee6c2091c3)
+
+![productDetails](https://github.com/user-attachments/assets/c1cca312-a42c-423a-88d2-dcfafe1b3d5b)<br>
+
 📦 Order Processing: Smooth checkout, order history, and status tracking.<br>
+
+![cart](https://github.com/user-attachments/assets/7e9310df-0592-46d6-bfbf-89ee6c2091c3)
 👤 User Profile: View and manage personal dashboard, orders, and account details.<br>
 Admin Features<br>
 📋 Product Management: Add, edit, and delete products dynamically.<br>
@@ -45,7 +50,7 @@ Contributions are welcome! Feel free to fork the repository and submit a pull re
 
 License<br>
 This project is licensed under the MIT License.<br>
-![home 1](https://github.com/user-attachments/assets/3ca31239-4cef-478e-8e35-cabffc92579f)
+
 ![home 1](https://github.com/user-attachments/assets/ee5b669b-ed63-499f-b3dc-d9f208626ff4)
 ![home2](https://github.com/user-attachments/assets/f3e3d1b1-94ce-475d-997d-8da76017129a)
 ![user-profile](https://github.com/user-attachments/assets/e3c4ff2b-4ebf-47d5-bd58-422c35f096d2)
