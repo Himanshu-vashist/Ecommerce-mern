@@ -19,4 +19,20 @@ instance.interceptors.request.use(
   }
 );
 
+// Add a response interceptor to handle errors
+instance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    // Check if the error is due to an ad blocker
+    if (!error.response && error.message === 'Network Error') {
+      console.warn('Possible ad blocker interference detected');
+      // You could add custom handling here
+      error.isAdBlockerError = true;
+    }
+    return Promise.reject(error);
+  }
+);
+
 export default instance;

@@ -6,6 +6,7 @@ import SearchInput from "../Form/SearchInput";
 import useCategory from "../../hooks/useCategory";
 import { useCart } from "../../context/cart";
 import { Badge } from "antd";
+import { FaShoppingCart, FaUser, FaSignOutAlt, FaSignInAlt, FaUserPlus, FaTachometerAlt } from "react-icons/fa";
 
 
 const Header = () => {
@@ -34,8 +35,8 @@ const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-white shadow-sm fixed-top">
       <div className="container">
-        <Link to="/" className="navbar-brand text-primary fw-bold">
-          🛒 Ecommerce
+        <Link to="/" className="navbar-brand">
+          <span className="brand-icon">🛒</span> Shopify
         </Link>
         <button
           className="navbar-toggler"
@@ -54,19 +55,19 @@ const Header = () => {
               <SearchInput />
             </li>
             <li className="nav-item">
-              <NavLink to="/" className="nav-link text-dark">
+              <NavLink to="/" className="nav-link">
                 Home
               </NavLink>
             </li>
             <li className="nav-item dropdown">
               <Link
-                className="nav-link dropdown-toggle text-dark"
+                className="nav-link dropdown-toggle"
                 to="/categories"
                 data-bs-toggle="dropdown"
               >
                 Categories
               </Link>
-              <ul className="dropdown-menu">
+              <ul className="dropdown-menu shadow-sm border-0">
                 <li>
                   <Link className="dropdown-item" to="/categories">
                     All Categories
@@ -92,27 +93,27 @@ const Header = () => {
             {!auth?.user ? (
               <>
                 <li className="nav-item">
-                  <NavLink to="/register" className="nav-link text-dark">
-                    Register
+                  <NavLink to="/register" className="nav-link">
+                    <FaUserPlus className="me-1" /> Register
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink to="/login" className="nav-link text-dark">
-                    Login
+                  <NavLink to="/login" className="nav-link">
+                    <FaSignInAlt className="me-1" /> Login
                   </NavLink>
                 </li>
               </>
             ) : (
               <li className="nav-item dropdown">
                 <NavLink
-                  className="nav-link dropdown-toggle text-dark"
+                  className="nav-link dropdown-toggle"
                   href="#"
                   role="button"
                   data-bs-toggle="dropdown"
                 >
-                  {auth?.user?.name}
+                  <FaUser className="me-1" /> {auth?.user?.name}
                 </NavLink>
-                <ul className="dropdown-menu">
+                <ul className="dropdown-menu shadow-sm border-0">
                   <li>
                     <NavLink
                       to={`/dashboard/${
@@ -120,30 +121,30 @@ const Header = () => {
                       }`}
                       className="dropdown-item"
                     >
-                      Dashboard
+                      <FaTachometerAlt className="me-2" /> Dashboard
                     </NavLink>
                   </li>
                   <li>
                     <NavLink
                       onClick={handleLogout}
                       to="/login"
-                      className="dropdown-item"
+                      className="dropdown-item text-danger"
                     >
-                      Logout
+                      <FaSignOutAlt className="me-2" /> Logout
                     </NavLink>
                   </li>
                 </ul>
               </li>
             )}
             <li className="nav-item">
-              <NavLink to="/cart" className="nav-link text-dark">
+              <NavLink to="/cart" className="nav-link position-relative">
                 <Badge
                   count={cart?.length ?? 0}
                   showZero
                   offset={[10, -5]}
-                  style={{ backgroundColor: "#007bff" }}
+                  style={{ backgroundColor: "var(--primary-color)" }}
                 >
-                  Cart
+                  <FaShoppingCart /> Cart
                 </Badge>
               </NavLink>
             </li>

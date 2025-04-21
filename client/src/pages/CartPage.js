@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import DropIn from "braintree-web-drop-in-react";
 import axios from "../config/axios";
 import toast from "react-hot-toast";
+import AdBlockerWarning from "../components/AdBlockerWarning";
 import "../styles/CartStyles.css";
 
 const CartPage = () => {
@@ -14,6 +15,7 @@ const CartPage = () => {
   const [clientToken, setClientToken] = useState("");
   const [instance, setInstance] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [adBlockerDetected, setAdBlockerDetected] = useState(false);
   const navigate = useNavigate();
 
   // Calculate total price
@@ -47,6 +49,10 @@ const CartPage = () => {
     } catch (error) {
       console.error(error);
       toast.error("Failed to fetch payment token");
+      // Check if the error might be due to an ad blocker
+      if (error.message === 'Network Error' || error.isAdBlockerError) {
+        setAdBlockerDetected(true);
+      }
     }
   };
 
@@ -82,6 +88,7 @@ const CartPage = () => {
 
   return (
     <Layout>
+      <AdBlockerWarning show={adBlockerDetected} />
       <div className="cart-page">
         <div className="row">
           <div className="col-md-12">
@@ -108,11 +115,15 @@ const CartPage = () => {
                   <div className="row card flex-row" key={p._id}>
                     <div className="col-md-4">
                       <img
-                        src={`/api/v1/product/product-photo/${p._id}`}
+                        src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
                         className="card-img-top"
                         alt={p.name}
                         width="100%"
                         height="130px"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "/images/default-product.png";
+                        }}
                       />
                     </div>
                     <div className="col-md-4">

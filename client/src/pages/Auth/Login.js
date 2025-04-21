@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import Layout from "../../components/Layout/Layout.js";
-import { useNavigate, useLocation,Link } from "react-router-dom";
-import axios from "axios";
+import { useNavigate, useLocation, Link } from "react-router-dom";
+import axios from "../../config/axios";
 import "./Login.css";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/auth.js";
+import AdBlockerWarning from "../../components/AdBlockerWarning";
+import { FiMail, FiLock, FiLogIn } from "react-icons/fi";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [auth, setAuth] = useAuth({});
+  const [adBlockerDetected, setAdBlockerDetected] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -17,7 +20,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_API}/api/v1/auth/login`,
+        `/api/v1/auth/login`,
         { email, password }
       );
 
@@ -36,11 +39,16 @@ const Login = () => {
     } catch (error) {
       console.error("Error during login:", error.response || error.message);
       toast.error("Error during login, please try again later.");
+      // Check if the error might be due to an ad blocker
+      if (error.message === 'Network Error' || error.isAdBlockerError) {
+        setAdBlockerDetected(true);
+      }
     }
   };
 
   return (
     <Layout title={"Login"}>
+      <AdBlockerWarning show={adBlockerDetected} />
       <div className="login-container">
         <div className="login-card">
           <div className="login-left">
@@ -60,7 +68,9 @@ const Login = () => {
               <h2 className="form-title">Sign In</h2>
 
               <div className="form-group">
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">
+                  <FiMail className="input-icon" /> Email
+                </label>
                 <input
                   type="email"
                   id="email"
@@ -68,11 +78,14 @@ const Login = () => {
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
               </div>
 
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">
+                  <FiLock className="input-icon" /> Password
+                </label>
                 <input
                   type="password"
                   id="password"
@@ -80,6 +93,7 @@ const Login = () => {
                   placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
               </div>
 
@@ -92,7 +106,7 @@ const Login = () => {
                   Forgot Password?
                 </button>
                 <button type="submit" className="btn btn-primary">
-                  Login
+                  <FiLogIn className="btn-icon" /> Login
                 </button>
               </div>
 

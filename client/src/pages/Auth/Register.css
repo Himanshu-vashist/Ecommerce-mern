@@ -1,132 +1,291 @@
-/* General Styling */
-
-
+/* Register Page Styling */
 .register-page {
   display: flex;
   flex-wrap: wrap;
   min-height: 100vh;
-  margin-top: 3rem;
+  margin-top: 5rem;
   justify-content: center;
-  background-color: #f9f9f9;
+  background-color: #f9fafb;
+  padding: 2rem 1rem;
+  background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%234361ee" fill-opacity="0.05" d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,224C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 /* Left Section */
 .register-left {
   flex: 1;
-  background: linear-gradient(135deg, #007bff, #0056b3);
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 3rem 2rem;
   text-align: center;
-  margin: 3rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px 0 0 20px;
+  clip-path: polygon(0 0, 100% 0, 92% 100%, 0% 100%);
+}
+
+.register-left::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+  transform: rotate(30deg);
+  z-index: 1;
+}
+
+.register-left::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(to top, rgba(0,0,0,0.1), rgba(0,0,0,0));
+  z-index: 1;
 }
 
 .register-left .register-image {
   max-width: 80%;
-  border-radius: 10px;
-  margin-bottom: 20px;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 2;
+  transition: all 0.5s ease;
+  transform: perspective(1000px) rotateY(-5deg);
+  filter: brightness(1.05);
+}
+
+.register-left:hover .register-image {
+  transform: perspective(1000px) rotateY(0deg);
 }
 
 .welcome-message {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  letter-spacing: -0.5px;
 }
 
 .description {
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 1.1rem;
+  line-height: 1.6;
   max-width: 400px;
+  opacity: 0.9;
+  position: relative;
+  z-index: 2;
+  margin: 0 auto;
 }
 
 /* Right Section */
 .register-right {
-  flex: 1;
+  flex: 1.2;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 30px;
+  padding: 3rem 2rem;
+  background-color: white;
+  border-radius: 0 20px 20px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.register-right::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(var(--primary-rgb), 0.03) 0%, rgba(var(--primary-rgb), 0) 70%);
+  z-index: -1;
+  border-radius: 50%;
 }
 
 .register-form-container {
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  max-width: 500px;
   width: 100%;
+  max-width: 500px;
+  position: relative;
 }
 
 .form-title {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #333333;
-  margin-bottom: 20px;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--dark-color);
+  margin-bottom: 2.5rem;
   text-align: center;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  letter-spacing: -0.5px;
+}
+
+.form-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border-radius: 4px;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 1.8rem;
+  position: relative;
 }
 
 .form-group label {
   display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  color: var(--dark-color);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
 }
 
 .form-control {
   width: 100%;
-  padding: 10px;
+  padding: 0.9rem 1.2rem;
   font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  background-color: #f8f9fa;
+  border: 2px solid transparent;
+  border-radius: 12px;
   outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.form-control:hover {
+  background-color: #f1f3f5;
 }
 
 .form-control:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  border-color: var(--primary-color);
+  background-color: white;
+  box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.15);
+}
+
+.form-group:focus-within label {
+  color: var(--primary-color);
 }
 
 .btn-primary {
-  background-color: #007bff;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   border: none;
   color: white;
-  padding: 10px 20px;
+  padding: 0.9rem 1.8rem;
   font-size: 1rem;
-  border-radius: 5px;
+  font-weight: 600;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
   width: 100%;
   text-align: center;
+  margin-top: 1.5rem;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+  z-index: -1;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(var(--primary-rgb), 0.4);
 }
 
 .login-link {
   text-align: center;
-  margin-top: 15px;
-  font-size: 0.9rem;
+  margin-top: 2.5rem;
+  font-size: 0.95rem;
+  color: var(--gray-color);
+  position: relative;
+}
+
+.login-link::before {
+  content: '';
+  position: absolute;
+  top: -1.25rem;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(var(--gray-rgb), 0.2), transparent);
 }
 
 .login-link a {
-  color: #007bff;
+  color: var(--primary-color);
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0 2px;
+}
+
+.login-link a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  transition: width 0.3s ease;
 }
 
 .login-link a:hover {
-  text-decoration: underline;
+  color: var(--secondary-color);
+}
+
+.login-link a:hover::after {
+  width: 100%;
+}
+
+/* Icon Styles */
+.input-icon {
+  margin-right: 5px;
+  vertical-align: middle;
+  color: var(--primary-color);
+}
+
+.btn-icon {
+  margin-right: 8px;
+  vertical-align: middle;
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .register-page {
     flex-direction: column;
   }
@@ -135,22 +294,58 @@
   .register-right {
     flex: none;
     width: 100%;
-    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 0;
+  }
+
+  .register-left {
+    border-radius: 20px 20px 0 0;
+    clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+  }
+
+  .register-right {
+    border-radius: 0 0 20px 20px;
   }
 
   .register-left .register-image {
-    max-width: 60%;
-  }
-
-  .form-title {
-    font-size: 1.5rem;
+    max-width: 50%;
+    margin-bottom: 1.5rem;
   }
 
   .welcome-message {
-    font-size: 1.6rem;
+    font-size: 2.2rem;
   }
 
   .description {
-    font-size: 0.9rem;
+    font-size: 1rem;
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 576px) {
+  .register-page {
+    padding: 1rem;
+    margin-top: 4rem;
+  }
+
+  .register-left,
+  .register-right {
+    padding: 2rem 1rem;
+  }
+
+  .form-title {
+    font-size: 1.75rem;
+  }
+
+  .welcome-message {
+    font-size: 1.8rem;
+  }
+
+  .description {
+    font-size: 0.95rem;
+  }
+
+  .btn-primary {
+    padding: 0.8rem 1.5rem;
   }
 }

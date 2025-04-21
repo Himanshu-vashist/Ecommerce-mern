@@ -11,7 +11,7 @@
     flex-direction: row;
     justify-content: space-between;
   }
-  
+
   .category .card-price {
     color: green;
     font-weight: bold;
@@ -24,15 +24,19 @@
     font-size: 14px;
     font-weight: bold;
   }
-  
+
   .category .card-text {
     color: rgb(90, 89, 89);
   }
-  
+
   .category .card img:hover {
     transform: scale(0.9);
   }
-  
+
   .category .card-img-top {
-    height: 300px !important;
+    height: 220px !important;
+    object-fit: contain;
+    background-color: #f8f9fa;
+    padding: 10px;
+    transition: var(--transition);
   }

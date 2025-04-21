@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import Layout from "./../components/Layout/Layout";
 import axios from "../config/axios";
 import { useParams, useNavigate } from "react-router-dom";
-import  './ProductDetailsStyles.css';
+import { useCart } from "../context/cart";
+import toast from "react-hot-toast";
+import './ProductDetailsStyles.css';
 
 const ProductDetails = () => {
   const params = useParams();
   const navigate = useNavigate();
+  const [cart, setCart] = useCart() || [[], () => {}];
   const [product, setProduct] = useState({});
   const [relatedProducts, setRelatedProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   //initalp details
   useEffect(() => {
@@ -17,6 +21,7 @@ const ProductDetails = () => {
   //getProduct
   const getProduct = async () => {
     try {
+      setLoading(true);
       const { data } = await axios.get(
         `/api/v1/product/get-product/${params.slug}`
       );
@@ -24,6 +29,8 @@ const ProductDetails = () => {
       getSimilarProduct(data?.product._id, data?.product.category._id);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
   //get similar product
@@ -39,79 +46,107 @@ const ProductDetails = () => {
   };
   return (
     <Layout>
-      <div className="row container product-details">
-        <div className="col-md-6">
-          <img
-            src={`/api/v1/product/product-photo/${product._id}`}
-            className="card-img-top"
-            alt={product.name}
-            height="300"
-            width={"350px"}
-          />
-        </div>
-        <div className="col-md-6 product-details-info">
-          <h1 className="text-center">Product Details</h1>
-          <hr />
-          <h6>Name : {product.name}</h6>
-          <h6>Description : {product.description}</h6>
-          <h6>
-            Price :
-            {product?.price?.toLocaleString("en-US", {
-              style: "currency",
-              currency: "USD",
-            })}
-          </h6>
-          <h6>Category : {product?.category?.name}</h6>
-          <button class="btn btn-secondary ms-1">ADD TO CART</button>
-        </div>
-      </div>
-      <hr />
-      <div className="row container similar-products">
-        <h4>Similar Products ➡️</h4>
-        {relatedProducts.length < 1 && (
-          <p className="text-center">No Similar Products found</p>
-        )}
-        <div className="d-flex flex-wrap">
-          {relatedProducts?.map((p) => (
-            <div className="card m-2" key={p._id}>
-              <img
-                src={`/api/v1/product/product-photo/${p._id}`}
-                className="card-img-top"
-                alt={p.name}
-              />
-              <div className="card-body">
-                <div className="card-name-price">
-                  <h5 className="card-title">{p.name}</h5>
-                  <h5 className="card-title card-price">
-                    {p.price.toLocaleString("en-US", {
-                      style: "currency",
-                      currency: "USD",
-                    })}
-                  </h5>
+      <div className="container product-details">
+        {loading ? (
+          <div className="text-center py-5">
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+            <p className="mt-3">Loading product details...</p>
+          </div>
+        ) : (
+          <div className="product-details-container">
+            <div className="row">
+              <div className="col-md-6 mb-4">
+                <div className="product-image-container">
+                  <img
+                    src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
+                    className="card-img-top"
+                    alt={product.name}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "/images/default-product.png";
+                    }}
+                  />
                 </div>
-                <p className="card-text ">
-                  {p.description.substring(0, 60)}...
-                </p>
-                <div className="card-name-price">
-                  <button
-                    className="btn btn-info ms-1"
-                    onClick={() => navigate(`/product/${p.slug}`)}
-                  >
-                    More Details
-                  </button>
-                  {/* <button
-                  className="btn btn-dark ms-1"
+              </div>
+              <div className="col-md-6 product-details-info">
+                <h1>{product.name}</h1>
+                <div className="category">{product?.category?.name}</div>
+                <div className="price">
+                  {product?.price?.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  })}
+                </div>
+                <h6><span>Description:</span> {product.description}</h6>
+                <h6><span>Availability:</span> {product.quantity > 0 ? `In Stock (${product.quantity})` : 'Out of Stock'}</h6>
+
+                <button
+                  className="add-to-cart-btn"
                   onClick={() => {
-                    setCart([...cart, p]);
+                    if (product.quantity <= 0) {
+                      toast.error("Product is out of stock");
+                      return;
+                    }
+                    setCart([...cart, product]);
                     localStorage.setItem(
                       "cart",
-                      JSON.stringify([...cart, p])
+                      JSON.stringify([...cart, product])
                     );
                     toast.success("Item Added to cart");
                   }}
+                  disabled={product.quantity <= 0}
                 >
-                  ADD TO CART
-                </button> */}
+                  {product.quantity > 0 ? 'ADD TO CART' : 'OUT OF STOCK'}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+      <div className="similar-products">
+        <h4>Similar Products</h4>
+        {relatedProducts.length < 1 && (
+          <div className="text-center py-4">
+            <div className="empty-product-icon mb-3">👀</div>
+            <p className="text-muted">No similar products found</p>
+          </div>
+        )}
+        <div className="row">
+          {relatedProducts?.map((p) => (
+            <div className="col-lg-3 col-md-4 col-sm-6" key={p._id}>
+              <div className="card">
+                <div className="card-img-container">
+                  <img
+                    src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
+                    className="card-img-top"
+                    alt={p.name}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "/images/default-product.png";
+                    }}
+                  />
+                </div>
+                <div className="card-body">
+                  <div className="card-name-price">
+                    <h5 className="card-title" title={p.name}>{p.name}</h5>
+                    <h5 className="card-title card-price">
+                      {p.price.toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                      })}
+                    </h5>
+                  </div>
+                  <p className="card-text">
+                    {p.description.substring(0, 60)}...
+                  </p>
+                  <button
+                    className="btn"
+                    onClick={() => navigate(`/product/${p.slug}`)}
+                  >
+                    View Details
+                  </button>
                 </div>
               </div>
             </div>

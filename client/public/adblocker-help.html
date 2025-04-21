@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ad Blocker Issue - Ecommerce App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #e74c3c;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #3498db;
+            margin-top: 30px;
+        }
+        .solution {
+            background-color: #f9f9f9;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .warning {
+            background-color: #fff8dc;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        img {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            margin: 15px 0;
+        }
+        code {
+            background-color: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ad Blocker Issue Detected</h1>
+    
+    <p>Your browser's ad blocker is preventing the application from making necessary API requests to our server. This is causing errors like:</p>
+    
+    <pre>Failed to load resource: net::ERR_BLOCKED_BY_CLIENT</pre>
+    
+    <div class="warning">
+        <h3>Why is this happening?</h3>
+        <p>Ad blockers sometimes block requests to certain API endpoints that match patterns commonly used by tracking or advertising scripts. In our case, some of our legitimate API endpoints are being incorrectly blocked.</p>
+    </div>
+    
+    <h2>How to Fix This Issue</h2>
+    
+    <div class="solution">
+        <h3>Option 1: Disable Ad Blocker for This Site (Recommended)</h3>
+        <p>The simplest solution is to disable your ad blocker for this website:</p>
+        <ol>
+            <li>Look for your ad blocker icon in your browser's toolbar</li>
+            <li>Click on it and select "Disable on this site" or similar option</li>
+            <li>Refresh the page</li>
+        </ol>
+        <p>Common ad blockers:</p>
+        <ul>
+            <li>uBlock Origin</li>
+            <li>AdBlock Plus</li>
+            <li>AdGuard</li>
+            <li>Brave Browser's built-in shields</li>
+        </ul>
+    </div>
+    
+    <div class="solution">
+        <h3>Option 2: Use a Different Browser</h3>
+        <p>If you prefer not to disable your ad blocker, you can try using a different browser without ad blocking extensions installed.</p>
+    </div>
+    
+    <h2>For Developers</h2>
+    
+    <p>If you're the developer of this application, you might want to consider:</p>
+    <ul>
+        <li>Renaming API endpoints to avoid common patterns that trigger ad blockers</li>
+        <li>Using a different domain for your API calls</li>
+        <li>Adding this information to your application's documentation</li>
+    </ul>
+    
+    <p><a href="/">Return to the application</a></p>
+</body>
+</html>

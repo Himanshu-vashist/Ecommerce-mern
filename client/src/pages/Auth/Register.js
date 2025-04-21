@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import Layout from "../../components/Layout/Layout.js";
 import "./Register.css"; // Custom CSS file for styling
 import toast from "react-hot-toast";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import axios from "../../config/axios";
+import { useNavigate, Link } from "react-router-dom";
+import AdBlockerWarning from "../../components/AdBlockerWarning";
+import { FiUser, FiMail, FiLock, FiPhone, FiMapPin, FiShield, FiUserPlus } from "react-icons/fi";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -12,6 +14,7 @@ const Register = () => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [answer, setAnswer] = useState("");
+  const [adBlockerDetected, setAdBlockerDetected] = useState(false);
   const navigate = useNavigate();
 
   // Form submission handler
@@ -19,7 +22,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_API}/api/v1/auth/register`,
+        `/api/v1/auth/register`,
         { name, email, password, phone, address, answer }
       );
       if (res.data.success) {
@@ -31,11 +34,16 @@ const Register = () => {
     } catch (error) {
       console.error("Error during registration:", error);
       toast.error("Error during registration, please try again later.");
+      // Check if the error might be due to an ad blocker
+      if (error.message === 'Network Error' || error.isAdBlockerError) {
+        setAdBlockerDetected(true);
+      }
     }
   };
 
   return (
     <Layout title={"Register"}>
+      <AdBlockerWarning show={adBlockerDetected} />
       <div className="register-page">
         {/* Left Section */}
         <div className="register-left">
@@ -57,7 +65,9 @@ const Register = () => {
             <h2 className="form-title">Create Your Account</h2>
             <form className="register-form" onSubmit={handleSubmit}>
               <div className="form-group">
-                <label htmlFor="name">Full Name</label>
+                <label htmlFor="name">
+                  <FiUser className="input-icon" /> Full Name
+                </label>
                 <input
                   type="text"
                   id="name"
@@ -69,7 +79,9 @@ const Register = () => {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="email">Email Address</label>
+                <label htmlFor="email">
+                  <FiMail className="input-icon" /> Email Address
+                </label>
                 <input
                   type="email"
                   id="email"
@@ -81,7 +93,9 @@ const Register = () => {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">
+                  <FiLock className="input-icon" /> Password
+                </label>
                 <input
                   type="password"
                   id="password"
@@ -93,7 +107,9 @@ const Register = () => {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="phone">Phone Number</label>
+                <label htmlFor="phone">
+                  <FiPhone className="input-icon" /> Phone Number
+                </label>
                 <input
                   type="tel"
                   id="phone"
@@ -105,7 +121,9 @@ const Register = () => {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="address">Address</label>
+                <label htmlFor="address">
+                  <FiMapPin className="input-icon" /> Address
+                </label>
                 <input
                   type="text"
                   id="address"
@@ -117,7 +135,9 @@ const Register = () => {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="answer">Security Question</label>
+                <label htmlFor="answer">
+                  <FiShield className="input-icon" /> Security Question
+                </label>
                 <input
                   type="text"
                   id="answer"
@@ -129,11 +149,11 @@ const Register = () => {
                 />
               </div>
               <button type="submit" className="btn btn-primary btn-block">
-                Register
+                <FiUserPlus className="btn-icon" /> Create Account
               </button>
             </form>
             <p className="login-link">
-              Already have an account? <a href="/login">Login here</a>.
+              Already have an account? <Link to="/login">Login here</Link>
             </p>
           </div>
         </div>

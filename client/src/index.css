@@ -1,4 +1,36 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap");
+
+:root {
+  --primary-color: #4361ee;
+  --primary-rgb: 67, 97, 238;
+  --secondary-color: #3f37c9;
+  --secondary-rgb: 63, 55, 201;
+  --accent-color: #4895ef;
+  --accent-rgb: 72, 149, 239;
+  --success-color: #4cc9f0;
+  --success-rgb: 76, 201, 240;
+  --warning-color: #f72585;
+  --warning-rgb: 247, 37, 133;
+  --danger-color: #e63946;
+  --danger-rgb: 230, 57, 70;
+  --light-color: #f8f9fa;
+  --light-rgb: 248, 249, 250;
+  --dark-color: #212529;
+  --dark-rgb: 33, 37, 41;
+  --gray-color: #6c757d;
+  --gray-rgb: 108, 117, 125;
+
+  /* UI Elements */
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+
+  /* Card Specific */
+  --card-border-radius: 16px;
+  --card-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  --card-hover-transform: translateY(-15px) scale(1.02);
+  --card-hover-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+}
 
 * {
   margin: 0;
@@ -6,139 +38,273 @@
   box-sizing: border-box;
 }
 
-/* font-family: 'Poppins', sans-serif; */
-/* font-family: 'Playfair Display', serif; */
+body {
+  font-family: "Inter", sans-serif;
+  line-height: 1.6;
+  color: var(--dark-color);
+  background-color: #f9fafb;
+}
 
-/* //navbar css */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--secondary-color);
+}
+
+/* Navbar CSS */
 .navbar {
-  font-family: "Poppins", sans-serif;
-  font-size: 17px;
-  line-height: 26px;
-  text-transform: uppercase;
-  box-shadow: 0 8px 6px -6px gray;
-  --webkit-box-shadow: 0 8px 6px -6px gray;
-  border-bottom: solid gray !important;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  background-color: #ffffff;
+  box-shadow: var(--box-shadow);
+  border: none !important;
+  padding: 0.75rem 1rem;
 }
 
 .nav-link {
-  font-weight: 300 !important;
+  font-weight: 500 !important;
+  color: var(--dark-color) !important;
+  padding: 0.5rem 1rem;
+  transition: var(--transition);
+}
+
+.nav-link:hover {
+  color: var(--primary-color) !important;
 }
 
 .active {
-  border-bottom: 2px solid black;
+  color: var(--primary-color) !important;
+  border-bottom: 2px solid var(--primary-color);
 }
 
 .navbar-brand {
   font-weight: 700;
-  font-family: "roboto", sans-serif;
-  letter-spacing: 3px;
+  font-family: "Playfair Display", serif;
+  letter-spacing: 1px;
+  color: var(--primary-color) !important;
+  font-size: 1.5rem;
 }
 
 .search-form {
   margin-right: 10px;
-  margin-top: 4px;
 }
+
 .search-form input {
-  border: none;
-  border-radius: 0;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--border-radius);
+  padding: 0.5rem 1rem;
+  transition: var(--transition);
 }
+
+.search-form input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+  outline: none;
+}
+
 .search-form button {
-  background-color: #000000;
-  border-radius: 0;
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius);
   color: white;
+  padding: 0.5rem 1rem;
+  transition: var(--transition);
 }
 
-/* =============================
-==========footer============= */
+.search-form button:hover {
+  background-color: var(--secondary-color);
+}
 
+/* Footer Styles */
 .footer {
   color: white;
-  padding: 25px;
-  background: #000000; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #434343,
-    #000000
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #434343, #000000);
+  padding: 3rem 0 2rem;
+  background: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  margin-top: 3rem;
+}
+
+.footer h4 {
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: white;
+  position: relative;
+  display: inline-block;
+}
+
+.footer h4:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 40px;
+  height: 2px;
+  background-color: var(--success-color);
+}
+
+.footer p {
+  font-size: 0.95rem;
+  opacity: 0.9;
 }
 
 .footer a {
   text-decoration: none;
   color: white;
-  padding: 10px;
+  padding: 0.5rem;
+  transition: var(--transition);
+  font-weight: 500;
+  opacity: 0.9;
 }
 
 .footer a:hover {
-  color: #ffefba;
-  border-bottom: 1px solid #ffefba;
+  color: var(--success-color);
+  opacity: 1;
+  text-decoration: none;
+  border-bottom: none;
 }
-/* =================================
-======== page not found css ======= */
+/* Page Not Found Styles */
 .pnf {
   display: flex;
-  min-height: 65vh;
+  min-height: 70vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  background-color: #f9fafb;
 }
 
 .pnf-title {
-  font-size: 100px;
+  font-size: 8rem;
   font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  line-height: 1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .pnf-heading {
-  font-weight: normal;
+  font-weight: 500;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: var(--dark-color);
 }
 
 .pnf-btn {
-  color: black;
-  border: 1px solid black;
-  text-decoration: none;
-  padding: 10px;
-  margin-top: 10px;
-}
-.pnf-btn:hover {
-  background-color: black;
   color: white;
+  background-color: var(--primary-color);
+  border: none;
+  text-decoration: none;
+  padding: 0.75rem 2rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  transition: var(--transition);
+  box-shadow: var(--box-shadow);
 }
-/* ========================================= */
-/* =========contact us ========= */
+
+.pnf-btn:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+/* Contact Us Styles */
 .contactus {
-  margin: 0;
-  padding: 0;
-  height: 70vh;
+  margin: 2rem 0;
+  padding: 2rem 0;
+  min-height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #f9fafb;
 }
 
-/* ==================== */
+.contactus img {
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+}
+
+.contactus img:hover {
+  transform: scale(1.02);
+}
+
+.contactus h1 {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.contactus p {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  color: var(--dark-color);
+}
+
+.contactus p svg {
+  color: var(--primary-color);
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+/* Product Link Styles */
 .product-link {
   text-decoration: none !important;
-  color: black !important;
+  color: var(--dark-color) !important;
+  transition: var(--transition);
 }
 
+.product-link:hover {
+  transform: translateY(-5px);
+}
+
+/* Category Button Styles */
 .cat-btn {
-  padding: 40px 0px;
-  font-size: 24px;
+  padding: 2rem 1rem;
+  font-size: 1.25rem;
   text-transform: uppercase;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: var(--dark-color);
+  border: 1px solid #e2e8f0;
 }
-.cat-btn:hover {
-  background-color: #434343;
-  color: white;
-}
-/* ================
-====dashboard
-=================== */
 
+.cat-btn:hover {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Dashboard Styles */
 .dashboard {
-  margin-top: 100px !important;
+  margin-top: 5rem !important;
+  padding: 2rem 0;
 }
 
 .dashboard-menu h4 {
-  background-color: #434343 !important;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: white;
-  padding: 20px 0px;
+  padding: 1rem 0;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
